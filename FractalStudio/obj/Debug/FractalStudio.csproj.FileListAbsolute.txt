@@ -1,0 +1,15 @@
+D:\C# Projects\FractalStudio\FractalStudio\bin\Debug\FractalStudio.exe.config
+D:\C# Projects\FractalStudio\FractalStudio\bin\Debug\FractalStudio.exe
+D:\C# Projects\FractalStudio\FractalStudio\bin\Debug\FractalStudio.pdb
+D:\C# Projects\FractalStudio\FractalStudio\obj\Debug\FractalStudio.csprojAssemblyReference.cache
+D:\C# Projects\FractalStudio\FractalStudio\obj\Debug\MainWindow.g.cs
+D:\C# Projects\FractalStudio\FractalStudio\obj\Debug\App.g.cs
+D:\C# Projects\FractalStudio\FractalStudio\obj\Debug\FractalStudio_MarkupCompile.cache
+D:\C# Projects\FractalStudio\FractalStudio\obj\Debug\FractalStudio_MarkupCompile.lref
+D:\C# Projects\FractalStudio\FractalStudio\obj\Debug\MainWindow.baml
+D:\C# Projects\FractalStudio\FractalStudio\obj\Debug\FractalStudio.g.resources
+D:\C# Projects\FractalStudio\FractalStudio\obj\Debug\FractalStudio.Properties.Resources.resources
+D:\C# Projects\FractalStudio\FractalStudio\obj\Debug\FractalStudio.csproj.GenerateResource.cache
+D:\C# Projects\FractalStudio\FractalStudio\obj\Debug\FractalStudio.csproj.CoreCompileInputs.cache
+D:\C# Projects\FractalStudio\FractalStudio\obj\Debug\FractalStudio.exe
+D:\C# Projects\FractalStudio\FractalStudio\obj\Debug\FractalStudio.pdb
