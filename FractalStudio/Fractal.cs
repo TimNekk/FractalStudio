@@ -18,7 +18,7 @@ namespace FractalStudio
             MaxRecursion = maxRecursion;
         }
 
-        public abstract void Draw(Canvas canvas, int x, int y, double length, double angle, double lengthRatio, double angleRatioLeft, double angleRatioRight, int n = 0);
+        public abstract void Draw(Canvas canvas, int x, int y, double length, double angle, double lengthRatio, double angleRatioLeft, double angleRatioRight, int step = 0);
         
         /// <summary>
         /// Source: https://stackoverflow.com/questions/2011832/generate-color-gradient-in-c-sharp

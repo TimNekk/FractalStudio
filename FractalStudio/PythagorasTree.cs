@@ -20,9 +20,9 @@ namespace FractalStudio
             double lengthRatio,
             double angleRatioLeft, 
             double angleRatioRight,
-            int n = 0)
+            int step = 0)
         {
-            if (n >= MaxRecursion) return;
+            if (step >= MaxRecursion) return;
 
             var (x1, y1) = (x + length * Math.Cos(angle), y - length * Math.Sin(angle));
 
@@ -32,13 +32,15 @@ namespace FractalStudio
                 Y1 = y,
                 X2 = x1,
                 Y2 = y1,
-                Stroke = new SolidColorBrush(Gradient[n]),
-                StrokeThickness = (double)(MaxRecursion - n) / 2
+                Stroke = new SolidColorBrush(Gradient[step]),
+                StrokeThickness = (double)(MaxRecursion - step) / 2
             };
             canvas.Children.Add(line);
             
-            Draw(canvas, (int)x1, (int)y1, length * lengthRatio, angle + Math.PI * angleRatioLeft, lengthRatio, angleRatioLeft, angleRatioRight, n + 1);
-            Draw(canvas, (int)x1, (int)y1, length * lengthRatio, angle - Math.PI * angleRatioRight, lengthRatio, angleRatioLeft, angleRatioRight, n + 1);
+            Draw(canvas, (int)x1, (int)y1, length * lengthRatio, angle + Math.PI * angleRatioLeft, 
+                lengthRatio, angleRatioLeft, angleRatioRight, step + 1);
+            Draw(canvas, (int)x1, (int)y1, length * lengthRatio, angle - Math.PI * angleRatioRight, 
+                lengthRatio, angleRatioLeft, angleRatioRight, step + 1);
         }
     }
 }
