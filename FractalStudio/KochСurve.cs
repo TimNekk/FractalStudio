@@ -8,7 +8,9 @@ namespace FractalStudio
 {
     public class KochСurve : Fractal
     {
-        public KochСurve(Color startColor, Color endColor, int maxRecursion) : base(startColor, endColor, maxRecursion)
+        private static int n;
+        
+        public KochСurve(Color startColor, Color endColor, int maxRecursion, int gradientLength) : base(startColor, endColor, maxRecursion, gradientLength)
         {
             
         }
@@ -30,10 +32,11 @@ namespace FractalStudio
                     Y1 = stY,
                     X2 = enX,
                     Y2 = enY,
-                    Stroke = new SolidColorBrush(Gradient[step]),
-                    StrokeThickness = 4
+                    Stroke = new SolidColorBrush(Gradient[n]),
+                    StrokeThickness = 1
                 };
                 canvas.Children.Add(line);
+                n += 1;
             }
 
             int mlX = stX + (enX - stX) / 3;
@@ -45,8 +48,47 @@ namespace FractalStudio
             int mX = (mlX + mrX) / 2;
             int mY = (mlY + mrY) / 2;
 
-            int mhX = mX;
-            int mhY = (int)(mY - Math.Sin(Math.PI / 3) * Math.Sqrt(Math.Pow(mrX - mlX, 2) + Math.Pow(mrY - mlY, 2)));
+            int length = (int)Math.Sqrt(Math.Pow(mrX - mlX, 2) + Math.Pow(mrY - mlY, 2));
+
+            int mhX = 0;
+            int mhY = 0;
+
+            if (mlX < mrX)
+            {
+                if (mlY > mrY)
+                {
+                    mhX = mlX - length / 2;
+                    mhY = mrY;
+                }
+                else if (mlY == mrY)
+                {
+                    mhX = mX;
+                    mhY = (int)(mY - Math.Sin(Math.PI / 3) * length);
+                }
+                else
+                {
+                    mhX = mrX + length / 2;
+                    mhY = mlY;
+                }
+            }
+            else if (mlX > mrX)
+            {
+                if (mlY < mrY)
+                {
+                    mhX = mlX + length / 2;
+                    mhY = mrY;
+                }
+                else if (mlY == mrY)
+                {
+                    mhX = mX;
+                    mhY = (int)(mY + Math.Sin(Math.PI / 3) * length);
+                }
+                else
+                {
+                    mhX = mrX - length / 2;
+                    mhY = mlY;
+                }
+            }
 
             Draw2(canvas, stX, stY, mlX, mlY, step + 1);
             Draw2(canvas, mlX, mlY, mhX, mhY, step + 1);

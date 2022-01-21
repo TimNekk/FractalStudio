@@ -7,7 +7,7 @@ namespace FractalStudio
 {
     public class PythagorasTree : Fractal
     {
-        public PythagorasTree(Color startColor, Color endColor, int maxRecursion) : base(startColor, endColor, maxRecursion)
+        public PythagorasTree(Color startColor, Color endColor, int maxRecursion, int gradientLength) : base(startColor, endColor, maxRecursion, gradientLength)
         {
             
         }
