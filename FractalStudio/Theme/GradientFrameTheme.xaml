@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style BasedOn="{StaticResource {x:Type Frame}}"
+           TargetType="{x:Type Frame}"
+           x:Key="GradientFrameTheme">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Frame">
+                        <Border x:Name="border">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0, 0.5" 
+                                                     EndPoint="1, 0.5">
+                                    <GradientStop Color="Fuchsia" Offset="0"/>
+                                    <GradientStop Color="MediumSpringGreen" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0, 0.5"
+                                                             EndPoint="1, 0.5">
+                                            <GradientStop Color="Fuchsia" Offset="0.5"/>
+                                            <GradientStop Color="MediumSpringGreen" Offset="0.5"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+</ResourceDictionary>

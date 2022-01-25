@@ -4,9 +4,182 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FractalStudio"
+        xmlns:richCanvas="clr-namespace:RichCanvas;assembly=RichCanvas"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1500">
+        Height="700" Width="1500"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip">
     <Grid>
-        <Canvas x:Name="FractalCanvas" Background="#212121"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="290"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0" Width="auto" 
+                    Background="#141937"
+                    MouseDown="ControlPanelOnMouseDown">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="FractalStudio"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Foreground="#a2a9c4"
+                           FontSize="30"
+                           Margin="40 20 0 20"/>
+            
+                <RadioButton Content="Дерево Пифагора"
+                             Height="50"
+                             FontSize="18"
+                             IsChecked="True"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Кривая Коха"
+                             Height="50"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Ковер Серпинского"
+                             Height="50"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Треугольник Серпинского"
+                             Height="50"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Множество Кантора"
+                             Height="50"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="1" Margin="0 0 0 20">
+                <TextBlock Text="Глубина рекурсии"
+                           HorizontalAlignment="Center"
+                           Foreground="#a2a9c4"
+                           FontSize="18"/>
+                
+                <Grid Margin="80 10 80 20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="35"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Content="-"
+                            Grid.Column="0"
+                            Height="30"
+                            Width="30"
+                            FontSize="26"
+                            FontWeight="Bold"
+                            Style="{StaticResource ButtonTheme}"/>
+                    
+                    <TextBlock Text="7"
+                               Grid.Column="1"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Foreground="#a2a9c4"
+                               FontSize="26"/>
+                    
+                    <Button Content="+"
+                            Grid.Column="2"
+                            Height="30"
+                            Width="30"
+                            FontSize="26"
+                            IsEnabled="False"
+                            Style="{StaticResource ButtonTheme}"/>
+                </Grid>
+                
+                <Grid Height="70"
+                      Margin="0 0 0 25">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Frame Grid.ColumnSpan="2"
+                           Cursor="Hand"
+                           Style="{StaticResource GradientFrameTheme}"/>
+                    
+                    <Button Grid.Column="0"
+                            Cursor="Hand"
+                            Style="{StaticResource TransparentButtonTheme}"/>
+                    <Button Grid.Column="1"
+                            Style="{StaticResource TransparentButtonTheme}"/>
+                </Grid>
+                
+                <Button Content="Сохранить"
+                        Height="45"
+                        FontSize="26"
+                        Margin="30 0"
+                        Style="{StaticResource ButtonTheme}"/>
+            </StackPanel>
+        </Grid>
+        
+        <StackPanel Grid.Column="1" Background="#0f142b">
+            <Border MouseDown="ControlPanelOnMouseDown"
+                    MouseLeftButtonDown="ControlPanelClick"
+                    Background="#141937">
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button Width="25" Height="25" 
+                            Content="_"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#a2a9c4"
+                            FontSize="26"
+                            Padding="0 -15 0 0"
+                            Click="MinimizeButtonClick"/>
+                    <Button Width="25" Height="25" 
+                            Content="□"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#a2a9c4"
+                            FontSize="26"
+                            FontWeight="Bold"
+                            Padding="0 -8 0 0"
+                            Click="FullscreenButtonClick"/>
+                    <Button Width="25" Height="25" 
+                            Content="╳"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#a2a9c4"
+                            FontWeight="Bold"
+                            Click="CloseButtonClick"/>
+                </StackPanel>
+            </Border>
+            
+            <richCanvas:RichItemsControl ItemsSource="{Binding Items}">
+
+                <richCanvas:RichItemsControl.Resources>
+                    <DataTemplate DataType="{x:Type Rectangle}">
+                        <Rectangle Fill="Red"></Rectangle>
+                    </DataTemplate>
+                </richCanvas:RichItemsControl.Resources>
+
+                <richCanvas:RichItemsControl.ItemContainerStyle>
+                    <Style TargetType="richCanvas:RichItemContainer">
+                        <Setter Property="Top"
+                                Value="{Binding Top, Mode=TwoWay}" />
+                        <Setter Property="Left"
+                                Value="{Binding Left, Mode=TwoWay}" />
+                        <Setter Property="Width"
+                                Value="{Binding Width, Mode=TwoWay}" />
+                        <Setter Property="Height"
+                                Value="{Binding Height, Mode=TwoWay}" />
+                    </Style>
+                </richCanvas:RichItemsControl.ItemContainerStyle>
+
+            </richCanvas:RichItemsControl>
+            
+            <Canvas x:Name="FractalCanvas"/>
+            
+                <!-- <xzoomandpan:TooledZoomAndPanControl> -->
+            <!-- <Canvas x:Name="FractalCanvas"/> -->
+            <!-- </xzoomandpan:TooledZoomAndPanControl> -->
+        </StackPanel>
+        
     </Grid>
 </Window>

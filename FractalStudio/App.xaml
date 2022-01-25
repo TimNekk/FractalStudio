@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:FractalStudio"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+         <ResourceDictionary>
+             <ResourceDictionary.MergedDictionaries>
+                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
+                 <ResourceDictionary Source="Theme/ButtonTheme.xaml"/>
+                 <ResourceDictionary Source="Theme/GradientFrameTheme.xaml"/>
+                 <ResourceDictionary Source="Theme/TransparentButtonTheme.xaml"/>
+             </ResourceDictionary.MergedDictionaries>
+         </ResourceDictionary>
     </Application.Resources>
 </Application>
