@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FractalStudio"
-        xmlns:richCanvas="clr-namespace:RichCanvas;assembly=RichCanvas"
         mc:Ignorable="d"
         Height="700" Width="1500"
         WindowStyle="None"
@@ -151,34 +150,7 @@
                 </StackPanel>
             </Border>
             
-            <richCanvas:RichItemsControl ItemsSource="{Binding Items}">
-
-                <richCanvas:RichItemsControl.Resources>
-                    <DataTemplate DataType="{x:Type Rectangle}">
-                        <Rectangle Fill="Red"></Rectangle>
-                    </DataTemplate>
-                </richCanvas:RichItemsControl.Resources>
-
-                <richCanvas:RichItemsControl.ItemContainerStyle>
-                    <Style TargetType="richCanvas:RichItemContainer">
-                        <Setter Property="Top"
-                                Value="{Binding Top, Mode=TwoWay}" />
-                        <Setter Property="Left"
-                                Value="{Binding Left, Mode=TwoWay}" />
-                        <Setter Property="Width"
-                                Value="{Binding Width, Mode=TwoWay}" />
-                        <Setter Property="Height"
-                                Value="{Binding Height, Mode=TwoWay}" />
-                    </Style>
-                </richCanvas:RichItemsControl.ItemContainerStyle>
-
-            </richCanvas:RichItemsControl>
-            
             <Canvas x:Name="FractalCanvas"/>
-            
-                <!-- <xzoomandpan:TooledZoomAndPanControl> -->
-            <!-- <Canvas x:Name="FractalCanvas"/> -->
-            <!-- </xzoomandpan:TooledZoomAndPanControl> -->
         </StackPanel>
         
     </Grid>
