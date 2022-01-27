@@ -11,9 +11,11 @@ namespace FractalStudio.Fractals
         
         public SierpinskiCarpet(Color startColor, Color endColor, int maxRecursion) : base(startColor, endColor, maxRecursion, 2)
         {
-            _gradientBrush = new LinearGradientBrush();
-            _gradientBrush.StartPoint = new Point(0, 0);
-            _gradientBrush.EndPoint = new Point(1, 1);
+            _gradientBrush = new LinearGradientBrush
+            {
+                StartPoint = new Point(0, 0),
+                EndPoint = new Point(1, 1)
+            };
             _gradientBrush.GradientStops.Add(new GradientStop(startColor, 0));
             _gradientBrush.GradientStops.Add(new GradientStop(endColor, 1));
         }
@@ -28,8 +30,6 @@ namespace FractalStudio.Fractals
             double angleRatioLeft, double angleRatioRight,
             int step = 0)
         {
-            if (step >= MaxRecursion) return;
-
             var square = new Rectangle
             {
                 Width = length,
