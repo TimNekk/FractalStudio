@@ -99,6 +99,7 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Fractals\CantorSet.cs" />
         <Compile Include="Fractals\Fractal.cs" />
         <Compile Include="Fractals\KochСurve.cs" />
         <Page Include="MainWindow.xaml">
@@ -111,6 +112,7 @@
         </Compile>
         <Compile Include="Fractals\PythagorasTree.cs" />
         <Compile Include="Fractals\SierpinskiCarpet.cs" />
+        <Compile Include="Fractals\SierpinskiTriangle.cs" />
         <Compile Include="MainWindow.xaml.cs">
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
