@@ -73,7 +73,7 @@ namespace FractalStudio.Fractals
             {
                 X1 = x, Y1 = y, 
                 X2 = x1, Y2 = y1,
-                Stroke = new SolidColorBrush(Gradient[step]), StrokeThickness = _strokeThickness
+                Stroke = new SolidColorBrush(Gradient[step + 1]), StrokeThickness = _strokeThickness
             };
             canvas.Children.Add(line1);
             
@@ -81,7 +81,7 @@ namespace FractalStudio.Fractals
             {
                 X1 = x, Y1 = y, 
                 X2 = x2, Y2 = y2,
-                Stroke = new SolidColorBrush(Gradient[step]), StrokeThickness = _strokeThickness
+                Stroke = new SolidColorBrush(Gradient[step + 1]), StrokeThickness = _strokeThickness
             };
             canvas.Children.Add(line2);
             
@@ -89,7 +89,7 @@ namespace FractalStudio.Fractals
             {
                 X1 = x1, Y1 = y1, 
                 X2 = x2, Y2 = y2,
-                Stroke = new SolidColorBrush(Gradient[step]), StrokeThickness = _strokeThickness
+                Stroke = new SolidColorBrush(Gradient[step + 1]), StrokeThickness = _strokeThickness
             };
             canvas.Children.Add(line3);
             
