@@ -2,8 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:FractalStudio"
-             xmlns:viewModel="clr-namespace:FractalStudio.MVVM.ViewModel"
-             xmlns:view="clr-namespace:FractalStudio.MVVM.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          <ResourceDictionary>
@@ -13,14 +11,6 @@
                  <ResourceDictionary Source="Theme/GradientFrameTheme.xaml"/>
                  <ResourceDictionary Source="Theme/TransparentButtonTheme.xaml"/>
              </ResourceDictionary.MergedDictionaries>
-             
-             <DataTemplate DataType="{x:Type viewModel:PythagorasTreeViewModel}">
-                 <view:PythagorasTreeView/>
-             </DataTemplate>
-             
-             <DataTemplate DataType="{x:Type viewModel:KochСurveViewModel}">
-                 <view:KochСurveView/>
-             </DataTemplate>
          </ResourceDictionary>
     </Application.Resources>
 </Application>

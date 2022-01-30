@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModel="clr-namespace:FractalStudio.MVVM.ViewModel"
         xmlns:local="clr-namespace:FractalStudio"
         mc:Ignorable="d"
         Height="700" Width="1500"
@@ -11,10 +10,6 @@
         Background="Transparent"
         AllowsTransparency="True"
         ResizeMode="CanResizeWithGrip">
-    
-    <Window.DataContext>
-        <viewModel:MainViewModel></viewModel:MainViewModel>
-    </Window.DataContext>
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -43,14 +38,12 @@
                              Height="50"
                              FontSize="18"
                              IsChecked="True"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding PythagorasTreeViewCommand}"/>
+                             Style="{StaticResource MenuButtonTheme}"/>
                 <RadioButton Content="Кривая Коха"
                              x:Name="KochСurveButton"
                              Height="50"
                              FontSize="18"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding KochСurveViewCommand}"/>
+                             Style="{StaticResource MenuButtonTheme}"/>
                 <RadioButton Content="Ковер Серпинского"
                             Height="50"
                             FontSize="18"
@@ -66,8 +59,6 @@
             </StackPanel>
             
             <StackPanel Grid.Row="1" Margin="0 0 0 20">
-                <ContentControl Content="{Binding CurrentView}"/>
-                
                 <TextBlock Text="Глубина рекурсии"
                            HorizontalAlignment="Center"
                            Foreground="#a2a9c4"
@@ -100,11 +91,10 @@
                             Width="30"
                             FontSize="26"
                             FontWeight="Bold"
-                            Style="{StaticResource ButtonTheme}"
-                            Command="{Binding RecursionReduceCommand}">
+                            Style="{StaticResource ButtonTheme}">
                     </Button>
                     
-                    <TextBlock Text="{Binding Recursion}"
+                     <TextBlock Text="4"
                                Grid.Column="1"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
@@ -116,8 +106,7 @@
                             Height="30"
                             Width="30"
                             FontSize="26"
-                            Style="{StaticResource ButtonTheme}"
-                            Command="{Binding RecursionAddCommand}"/>
+                            Style="{StaticResource ButtonTheme}"/>
                 </Grid>
                 
                 <Grid Height="70"
@@ -178,7 +167,7 @@
                 </StackPanel>
             </Border>
             
-            <Canvas DataContext="{Binding FractalCanvas}"/>
+            <Canvas x:Name="FractalCanvas"/>
             
         </StackPanel>
     </Grid>

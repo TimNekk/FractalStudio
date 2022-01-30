@@ -99,8 +99,6 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
-        <Compile Include="Core\ObservableObject.cs" />
-        <Compile Include="Core\RelayCommand.cs" />
         <Compile Include="Fractals\CantorSet.cs" />
         <Compile Include="Fractals\Fractal.cs" />
         <Compile Include="Fractals\KochСurve.cs" />
@@ -119,23 +117,12 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Page Include="MVVM\View\KochСurveView.xaml" />
-        <Page Include="MVVM\View\PythagorasTreeView.xaml" />
         <Page Include="Theme\ButtonTheme.xaml" />
         <Page Include="Theme\GradientFrameTheme.xaml" />
         <Page Include="Theme\MenuButtonTheme.xaml" />
         <Page Include="Theme\TransparentButtonTheme.xaml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="MVVM\ViewModel\KochСurveViewModel.cs" />
-        <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
-        <Compile Include="MVVM\ViewModel\PythagorasTreeViewModel.cs" />
-        <Compile Include="MVVM\View\KochСurveView.xaml.cs">
-          <DependentUpon>KochСurveView.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="MVVM\View\PythagorasTreeView.xaml.cs">
-          <DependentUpon>PythagorasTreeView.xaml</DependentUpon>
-        </Compile>
         <Compile Include="Properties\AssemblyInfo.cs">
             <SubType>Code</SubType>
         </Compile>
@@ -152,9 +139,6 @@
     <ItemGroup>
         <None Include="App.config" />
         <None Include="packages.config" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="MVVM\Model" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
