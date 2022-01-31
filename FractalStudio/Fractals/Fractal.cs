@@ -8,61 +8,135 @@ namespace FractalStudio.Fractals
 {
     public abstract class Fractal
     {
-        private protected readonly List<Color> Gradient;
-        private protected readonly int MaxRecursion;
-
-        protected Fractal(Color startColor, Color endColor, int maxRecursion, int gradientLength)
-        {
-            Gradient = GetColorGradient(startColor, endColor, gradientLength).ToList();
-            MaxRecursion = maxRecursion;
-        }
-
-        public abstract void Draw(Canvas canvas, int x, int y, double length, double angle, double lengthRatio, 
-            double angleRatioLeft, double angleRatioRight, int step = 0);
+        private protected Canvas _canvas;
         
-        /// <summary>
-        /// Source: https://stackoverflow.com/questions/2011832/generate-color-gradient-in-c-sharp
-        /// </summary>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <param name="totalNumberOfColors"></param>
-        /// <returns></returns>
-        private static IEnumerable<Color> GetColorGradient(Color from, Color to, int totalNumberOfColors)
+        private protected int _recursion;
+
+        public int Recursion
         {
-            if (totalNumberOfColors < 2)
+            get => _recursion;
+            set
             {
-                throw new ArgumentException("Gradient cannot have less than two colors.", nameof(totalNumberOfColors));
+                _recursion = value;
+                UpdateGradientDepth();
+                Draw();
             }
-
-            double diffA = to.A - from.A;
-            double diffR = to.R - from.R;
-            double diffG = to.G - from.G;
-            double diffB = to.B - from.B;
-
-            var steps = totalNumberOfColors - 1;
-
-            var stepA = diffA / steps;
-            var stepR = diffR / steps;
-            var stepG = diffG / steps;
-            var stepB = diffB / steps;
-
-            yield return from;
-
-            for (var i = 1; i < steps; ++i)
-            {
-                yield return Color.FromArgb(
-                    (byte)c(from.A, stepA),
-                    (byte)c(from.R, stepR),
-                    (byte)c(from.G, stepG),
-                    (byte)c(from.B, stepB));
-
-                int c(int fromC, double stepC)
-                {
-                    return (int)Math.Round(fromC + stepC * i);
-                }
-            }
-
-            yield return to;
         }
+        
+        private protected Gradient _gradient;
+
+        public Gradient Gradient
+        {
+            get => _gradient;
+            set
+            {
+                _gradient = value;
+                UpdateGradientDepth();
+                Draw();
+            }
+        }
+        
+        private protected double _lengthRatio;
+        
+        public double LengthRatio
+        {
+            get => _lengthRatio;
+            set
+            {
+                _lengthRatio = value;
+                Draw();
+                }
+        }
+        
+        private protected double _angleRatioLeft;
+        
+        public double AngleRatioLeft
+        {
+            get => _angleRatioLeft;
+            set
+            {
+                _angleRatioLeft = value;
+                Draw();
+            }
+        }
+        
+        private protected double _angleRatioRight;
+        
+        public double AngleRatioRight
+        {
+            get => _angleRatioRight;
+            set
+            {
+                _angleRatioRight = value;
+                Draw();
+            }
+        }
+        
+        private protected double _scale;
+
+        public double Scale
+        {
+            get => _scale;
+            set
+            {
+                _scale = value;
+                Draw();
+            }
+        }
+        
+        private protected double _spacing;
+
+        public double Spacing
+        {
+            get => _spacing;
+            set
+            {
+                _spacing = value;
+                Draw();
+            }
+        }
+        
+        private protected int _x;
+
+        public int X
+        {
+            get => _x;
+            set
+            {
+                _x = value;
+                Draw();
+            }
+        }
+        
+        private protected int _y;
+
+        public int Y
+        {
+            get => _y;
+            set
+            {
+                _y = value;
+                Draw();
+            }
+        }
+        
+        protected Fractal(Canvas canvas, int recursion, int x, int y, double scale, double lengthRatio, 
+            double angleRatioLeft, double angleRatioRight, double spacing, Gradient gradient)
+        {
+            _canvas = canvas;
+            _recursion = recursion;
+            _x = x;
+            _y = y;
+            _scale = scale;
+            _gradient = gradient;
+            _lengthRatio = lengthRatio;
+            _angleRatioLeft = angleRatioLeft;
+            _angleRatioRight = angleRatioRight;
+            _spacing = spacing;
+        }
+
+        public abstract void Draw();
+        
+        protected abstract void UpdateGradientDepth();
     }
 }
