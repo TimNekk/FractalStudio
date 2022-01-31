@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FractalStudio"
         mc:Ignorable="d"
-        Height="700" Width="1500"
+        Height="800" Width="1500"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
-        ResizeMode="CanResizeWithGrip">
+        ResizeMode="CanResizeWithGrip"
+        MinHeight="800" MinWidth="1000">
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -21,8 +22,8 @@
                     Background="#141937"
                     MouseDown="ControlPanelOnMouseDown">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
             <StackPanel Grid.Row="0">
@@ -37,77 +38,161 @@
                              x:Name="PythagorasTreeButton"
                              Height="50"
                              FontSize="18"
-                             IsChecked="True"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Click="PythagorasTreeButtonClick"/>
                 <RadioButton Content="Кривая Коха"
-                             x:Name="KochСurveButton"
                              Height="50"
                              FontSize="18"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Click="KochСurveButtonClick"/>
                 <RadioButton Content="Ковер Серпинского"
                             Height="50"
                             FontSize="18"
-                            Style="{StaticResource MenuButtonTheme}"/>
+                            Style="{StaticResource MenuButtonTheme}"
+                            Click="SierpinskiCarpetButtonClick"/>
                 <RadioButton Content="Треугольник Серпинского"
                              Height="50"
                              FontSize="18"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Click="SierpinskiTriangleButtonClick"/>
                 <RadioButton Content="Множество Кантора"
+                             x:Name="CantorSetButton"
                              Height="50"
                              FontSize="18"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Click="CantorSetButtonClick"/>
             </StackPanel>
             
-            <StackPanel Grid.Row="1" Margin="0 0 0 20">
-                <TextBlock Text="Глубина рекурсии"
-                           HorizontalAlignment="Center"
-                           Foreground="#a2a9c4"
-                           FontSize="18">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
+            <StackPanel Grid.Row="1" 
+                        Margin="0 00 0 20">
+                <StackPanel Margin="0 0 0 15">
+                    <TextBlock Text="Расстояние"
+                               HorizontalAlignment="Center"
+                               Foreground="#a2a9c4"
+                               FontSize="18">
+                    </TextBlock>
+                
+                    <Slider x:Name="SpacingSlider"
+                            Cursor="Hand"
+                            Margin="30 5"
+                            ValueChanged="SpacingSliderValueChanged"
+                            Minimum="5"
+                            Maximum="100"
+                            Value="1"
+                            TickFrequency="0.01"
+                            IsSnapToTickEnabled="True"/>
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsChecked, ElementName=CantorSetButton}" Value="true">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                </StackPanel>
+                
+                <StackPanel Margin="0 0 0 15">
+                    <TextBlock Text="Отношение длин"
+                               HorizontalAlignment="Center"
+                               Foreground="#a2a9c4"
+                               FontSize="18">
+                    </TextBlock>
+                
+                    <Slider x:Name="LengthRatioSlider"
+                            Cursor="Hand"
+                            Margin="30 5"
+                            ValueChanged="LengthRatioSliderValueChanged"
+                            Minimum="0"
+                            Maximum="1"
+                            Value="1"
+                            TickFrequency="0.005"
+                            IsSnapToTickEnabled="True"/>
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
                             <Setter Property="Visibility" Value="Hidden"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsChecked, ElementName=PythagorasTreeButton}" Value="true">
                                     <Setter Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding IsChecked, ElementName=KochСurveButton}" Value="true">
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                </StackPanel>
+                
+                <StackPanel Margin="0 0 0 15">
+                    <TextBlock Text="Левый угол"
+                               HorizontalAlignment="Center"
+                               Foreground="#a2a9c4"
+                               FontSize="18">
+                    </TextBlock>
+                
+                    <Slider x:Name="AngleRatioLeftSlider"
+                            Cursor="Hand"
+                            Margin="30 5"
+                            ValueChanged="AngleRatioLeftSliderValueChanged"
+                            Minimum="0"
+                            Maximum="0.6"
+                            Value="1"
+                            TickFrequency="0.005"
+                            IsSnapToTickEnabled="True"/>
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsChecked, ElementName=PythagorasTreeButton}" Value="true">
                                     <Setter Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
-                    </TextBlock.Style>
-                </TextBlock>
+                    </StackPanel.Style>
+                </StackPanel>
                 
-                <Grid Margin="80 10 80 20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="35"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="35"/>
-                    </Grid.ColumnDefinitions>
-                    
-                    <Button Content="-"
-                            Grid.Column="0"
-                            Height="30"
-                            Width="30"
-                            FontSize="26"
-                            FontWeight="Bold"
-                            Style="{StaticResource ButtonTheme}">
-                    </Button>
-                    
-                     <TextBlock Text="4"
-                               Grid.Column="1"
+                <StackPanel Margin="0 0 0 15">
+                    <TextBlock Text="Правый угол"
                                HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
                                Foreground="#a2a9c4"
-                               FontSize="26"/>
-                    
-                    <Button Content="+"
-                            Grid.Column="2"
-                            Height="30"
-                            Width="30"
-                            FontSize="26"
-                            Style="{StaticResource ButtonTheme}"/>
-                </Grid>
+                               FontSize="18"/>
+                
+                    <Slider x:Name="AngleRatioRightSlider"
+                            Cursor="Hand"
+                            Margin="30 5"
+                            ValueChanged="AngleRatioRightSliderValueChanged"
+                            Minimum="0"
+                            Maximum="0.6"
+                            Value="1"
+                            TickFrequency="0.01"
+                            IsSnapToTickEnabled="True"/>
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsChecked, ElementName=PythagorasTreeButton}" Value="true">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                </StackPanel>
+                
+                <StackPanel Margin="0 0 0 15">
+                    <TextBlock Text="Глубина рекурсии"
+                               HorizontalAlignment="Center"
+                               Foreground="#a2a9c4"
+                               FontSize="18">
+                    </TextBlock>
+                
+                    <Slider x:Name="RecursionSlider"
+                            Cursor="Hand"
+                            Margin="30 5"
+                            ValueChanged="RecursionSliderValueChanged"
+                            Minimum="1"
+                            Maximum="10"
+                            Value="4"
+                            TickFrequency="1"
+                            IsSnapToTickEnabled="True"/>
+                </StackPanel>
                 
                 <Grid Height="70"
                       Margin="0 0 0 25">
@@ -117,30 +202,46 @@
                     </Grid.ColumnDefinitions>
                     
                     <Frame Grid.ColumnSpan="2"
-                           Cursor="Hand"
-                           Style="{StaticResource GradientFrameTheme}"/>
+                           x:Name="GradientFrame"
+                           IsHitTestVisible="False"
+                           Cursor="Hand"/>
                     
                     <Button Grid.Column="0"
                             Cursor="Hand"
-                            Style="{StaticResource TransparentButtonTheme}"/>
+                            x:Name="StartGradientButton"
+                            BorderThickness="0"
+                            Click="StartGradientButtonClick"
+                            Background="Transparent"/>
                     <Button Grid.Column="1"
-                            Style="{StaticResource TransparentButtonTheme}"/>
+                            Cursor="Hand"
+                            x:Name="EndGradientButton"
+                            BorderThickness="0"
+                            Click="EndGradientButtonClick"
+                            Background="Transparent"/>
                 </Grid>
                 
                 <Button Content="Сохранить"
                         Height="45"
                         FontSize="26"
                         Margin="30 0"
-                        Style="{StaticResource ButtonTheme}"/>
+                        Style="{StaticResource ButtonTheme}"
+                        Click="SaveButtonClick"/>
             </StackPanel>
         </Grid>
         
-        <StackPanel Grid.Column="1" Background="#0f142b">
-            <Border MouseDown="ControlPanelOnMouseDown"
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Border Grid.Row="0"
+                    MouseDown="ControlPanelOnMouseDown"
                     MouseLeftButtonDown="ControlPanelClick"
                     Background="#141937">
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <Button Width="25" Height="25" 
+                            Cursor="Hand"
                             Content="_"
                             Background="Transparent"
                             BorderThickness="0"
@@ -149,6 +250,7 @@
                             Padding="0 -15 0 0"
                             Click="MinimizeButtonClick"/>
                     <Button Width="25" Height="25" 
+                            Cursor="Hand"
                             Content="□"
                             Background="Transparent"
                             BorderThickness="0"
@@ -158,6 +260,7 @@
                             Padding="0 -8 0 0"
                             Click="FullscreenButtonClick"/>
                     <Button Width="25" Height="25" 
+                            Cursor="Hand"
                             Content="╳"
                             Background="Transparent"
                             BorderThickness="0"
@@ -167,8 +270,23 @@
                 </StackPanel>
             </Border>
             
-            <Canvas x:Name="FractalCanvas"/>
             
-        </StackPanel>
+            <Border Grid.Row="1"
+                    x:Name="CanvasBorder"
+                    Background="#0f142b"
+                    Cursor="SizeAll"
+                    MouseWheel="Zoom"
+                    MouseLeftButtonDown="PanMouseDown"
+                    MouseLeftButtonUp="PanMouseUp"
+                    MouseMove="PanMouseMove">
+                <Viewbox>
+                    <Canvas x:Name="FractalCanvas"
+                            Height="775"
+                            Width="1210"
+                            Background="#0f142b"
+                            ClipToBounds="True"/>
+                </Viewbox>
+            </Border>
+        </Grid>
     </Grid>
 </Window>
