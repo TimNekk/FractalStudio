@@ -7,51 +7,54 @@ namespace FractalStudio.Fractals
 {
     public class SierpinskiCarpet : Fractal
     {
-        private readonly LinearGradientBrush _gradientBrush;
-        
-        public SierpinskiCarpet(Color startColor, Color endColor, int maxRecursion) : base(startColor, endColor, maxRecursion, 2)
+        private readonly double _length;
+
+        public SierpinskiCarpet(Canvas canvas, int recursion, int x, int y, double scale, double lengthRatio,
+            double angleRatioLeft, double angleRatioRight, double spacing, Gradient gradient) :
+            base(canvas, recursion, x, y, scale, lengthRatio, angleRatioLeft, angleRatioRight, spacing, gradient)
         {
-            _gradientBrush = new LinearGradientBrush
+            _length = 500;
+            UpdateGradientDepth();
+        }
+        
+        protected sealed override void UpdateGradientDepth()
+        {
+            _gradient.Length = 2;
+        }
+
+        public override void Draw()
+        {
+            _canvas.Children.Clear();
+            
+            var gradientBrush = new LinearGradientBrush
             {
                 StartPoint = new Point(0, 0),
                 EndPoint = new Point(1, 1)
             };
-            _gradientBrush.GradientStops.Add(new GradientStop(startColor, 0));
-            _gradientBrush.GradientStops.Add(new GradientStop(endColor, 1));
-        }
-
-        public override void Draw(
-            Canvas canvas,
-            int x,
-            int y,
-            double length, 
-            double angle,
-            double lengthRatio,
-            double angleRatioLeft, double angleRatioRight,
-            int step = 0)
-        {
+            gradientBrush.GradientStops.Add(new GradientStop(_gradient[0], 0));
+            gradientBrush.GradientStops.Add(new GradientStop(_gradient[1], 1));
+            
             var square = new Rectangle
             {
-                Width = length,
-                Height = length,
-                Fill = _gradientBrush
+                Width = _length * _scale,
+                Height = _length * _scale,
+                Fill = gradientBrush
             };
-            Canvas.SetTop(square, y);
-            Canvas.SetLeft(square, x);
-            canvas.Children.Insert(0, square);
+            Canvas.SetTop(square, _y);
+            Canvas.SetLeft(square, _x);
+            _canvas.Children.Insert(0, square);
 
-            int newLength = (int) length / 3;
-            DrawHoles(canvas, x + newLength, y + newLength, newLength);
+            int newLength = (int) (_length * _scale / 3);
+            DrawHoles(_x + newLength, _y + newLength, newLength);
         }
-        
+
         private void DrawHoles(
-            Canvas canvas,
             int x,
             int y,
             double length,
             int step = 0)
         {
-            if (step >= MaxRecursion) return;
+            if (step >= _recursion) return;
             
             var square = new Rectangle
             {
@@ -62,7 +65,7 @@ namespace FractalStudio.Fractals
             };
             Canvas.SetTop(square, y);
             Canvas.SetLeft(square, x);
-            canvas.Children.Insert(step + 1, square);
+            _canvas.Children.Insert(step + 1, square);
             
             int newLength = (int) length / 3;
             int newLengthX2 = newLength * 2;
@@ -73,16 +76,16 @@ namespace FractalStudio.Fractals
             int secondRow = y + newLength;
             int thirdRow = y + newLength + (int)length;
             
-            DrawHoles(canvas, firstColumn, secondRow, newLength, step + 1);
-            DrawHoles(canvas, firstColumn, firstRow, newLength, step + 1);
-            DrawHoles(canvas, firstColumn, thirdRow, newLength, step + 1);
+            DrawHoles(firstColumn, secondRow, newLength, step + 1);
+            DrawHoles(firstColumn, firstRow, newLength, step + 1);
+            DrawHoles(firstColumn, thirdRow, newLength, step + 1);
 
-            DrawHoles(canvas, secondColumn, firstRow, newLength, step + 1);
-            DrawHoles(canvas, secondColumn, thirdRow, newLength, step + 1);
+            DrawHoles(secondColumn, firstRow, newLength, step + 1);
+            DrawHoles(secondColumn, thirdRow, newLength, step + 1);
 
-            DrawHoles(canvas, thirdColumn, secondRow, newLength, step + 1);
-            DrawHoles(canvas, thirdColumn, firstRow, newLength, step + 1);
-            DrawHoles(canvas, thirdColumn, thirdRow, newLength, step + 1);
+            DrawHoles(thirdColumn, secondRow, newLength, step + 1);
+            DrawHoles(thirdColumn, firstRow, newLength, step + 1);
+            DrawHoles(thirdColumn, thirdRow, newLength, step + 1);
         }
     }
 }
