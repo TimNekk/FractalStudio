@@ -8,35 +8,36 @@ namespace FractalStudio.Fractals
     public class CantorSet : Fractal
     {
         private readonly int _strokeThickness;
-        private readonly int _spacing;
+        private readonly double _length;
         
-        public CantorSet(Color startColor, Color endColor, int maxRecursion, int gradientLength) : base(startColor, endColor, maxRecursion, gradientLength)
+        public CantorSet(Canvas canvas, int recursion, int x, int y, double scale, double lengthRatio,
+            double angleRatioLeft, double angleRatioRight, double spacing, Gradient gradient) :
+            base(canvas, recursion, x, y, scale, lengthRatio, angleRatioLeft, angleRatioRight, spacing, gradient)
         {
+            _length = 1000;
             _strokeThickness = 10;
-            _spacing = 35;
+            UpdateGradientDepth();
+        }
+        
+        protected sealed override void UpdateGradientDepth()
+        {
+            _gradient.Length = _recursion;
         }
 
-        public override void Draw(
-            Canvas canvas,
-            int x,
-            int y,
-            double length, 
-            double angle,
-            double lengthRatio,
-            double angleRatioLeft, double angleRatioRight,
-            int step = 0)
+        public override void Draw()
         {
-            DrawLine(canvas, x, y, length);
+            _canvas.Children.Clear();
+            DrawLine(_x, _y, _length * _scale);
+
         }
-        
+
         private void DrawLine(
-            Canvas canvas,
             int x,
             int y,
             double length,
             int step = 0)
         {
-            if (step >= MaxRecursion) return;
+            if (step >= _recursion) return;
 
             var line = new Line
             {
@@ -44,11 +45,11 @@ namespace FractalStudio.Fractals
                 X2 = x + length, Y2 = y,
                 Stroke = new SolidColorBrush(Gradient[step]), StrokeThickness = _strokeThickness
             };
-            canvas.Children.Add(line);
+            _canvas.Children.Add(line);
             
             int newLength = (int) length / 3;
-            DrawLine(canvas, x, y + _spacing, newLength, step + 1);
-            DrawLine(canvas, x + (int)length * 2 / 3, y + _spacing, newLength, step + 1);
+            DrawLine(x, y + (int)_spacing, newLength, step + 1);
+            DrawLine(x + (int)length * 2 / 3, y + (int)_spacing, newLength, step + 1);
         }
     }
 }
