@@ -198,6 +198,9 @@ namespace FractalStudio
             }
         }
 
+        /// <summary>
+        /// MainWindow constructor
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -214,6 +217,11 @@ namespace FractalStudio
             ReRatio = 0.1;
         }
 
+        /// <summary>
+        /// Moves window around
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void ControlPanelOnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -222,26 +230,51 @@ namespace FractalStudio
             }
         }
 
+        /// <summary>
+        /// Closes application
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void CloseButtonClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
         
+        /// <summary>
+        /// Turns fullscreen on double click
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void ControlPanelClick(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2) FullscreenButtonClick(sender, e);
         }
         
+        /// <summary>
+        /// Turns fullscreen on and off
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void FullscreenButtonClick(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState != WindowState.Maximized ? WindowState.Maximized : WindowState.Normal;
         }
         
+        /// <summary>
+        /// Minimizes window
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void MinimizeButtonClick(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
 
+        /// <summary>
+        /// Draws Pythagoras Tree Fractal
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void PythagorasTreeButtonClick(object sender, RoutedEventArgs e)
         {
             MaxRecursion = 12;
@@ -251,6 +284,11 @@ namespace FractalStudio
             Fractal.Draw();
         }
 
+        /// <summary>
+        /// Draws Koch Сurve Fractal
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void KochСurveButtonClick(object sender, RoutedEventArgs e)
         {
             MaxRecursion = 6;
@@ -260,6 +298,11 @@ namespace FractalStudio
             Fractal.Draw();
         }
         
+        /// <summary>
+        /// Draws Sierpinski Carpet Fractal
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void SierpinskiCarpetButtonClick(object sender, RoutedEventArgs e)
         {
             MaxRecursion = 5;
@@ -269,6 +312,11 @@ namespace FractalStudio
             Fractal.Draw();
         }
         
+        /// <summary>
+        /// Draws Sierpinski Triangle Fractal
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void SierpinskiTriangleButtonClick(object sender, RoutedEventArgs e)
         {
             MaxRecursion = 7;
@@ -278,6 +326,11 @@ namespace FractalStudio
             Fractal.Draw();
         }
         
+        /// <summary>
+        /// Draws Cantor Set Fractal
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void CantorSetButtonClick(object sender, RoutedEventArgs e)
         {
             Spacing = 35;
@@ -288,6 +341,11 @@ namespace FractalStudio
             Fractal.Draw();
         }
         
+        /// <summary>
+        /// Draws Julia Set Fractal
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void JuliaSetButtonClick(object sender, RoutedEventArgs e)
         {
             MaxRecursion = 50;
@@ -299,11 +357,21 @@ namespace FractalStudio
             Fractal.Draw();
         }
 
+        /// <summary>
+        /// Sets Recursion
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void RecursionSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Recursion = (int) RecursionSlider.Value;
         }
 
+        /// <summary>
+        /// Sets gradient start color
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void StartGradientButtonClick(object sender, RoutedEventArgs e)
         {
             Color newColor = ShowColorPicker(Gradient.StartColor);
@@ -315,6 +383,11 @@ namespace FractalStudio
             }
         }
 
+        /// <summary>
+        /// Sets gradient end color
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void EndGradientButtonClick(object sender, RoutedEventArgs e)
         {
             Color newColor = ShowColorPicker(Gradient.EndColor);
@@ -326,6 +399,11 @@ namespace FractalStudio
             }
         }
 
+        /// <summary>
+        /// Opens color picker
+        /// </summary>
+        /// <param name="startColor"></param>
+        /// <returns>Selected color</returns>
         private Color ShowColorPicker(Color startColor)
         {
             var dialog = new ColorPickerDialog(startColor);
@@ -334,71 +412,131 @@ namespace FractalStudio
             return startColor;
         }
 
+        /// <summary>
+        /// Sets gradient on gradient frame
+        /// </summary>
         private void SetFrameGradient()
         {
             GradientFrame.Background = new LinearGradientBrush(Gradient.StartColor, Gradient.EndColor, new Point(0, 0.5), new Point(1, 0.5));
         }
 
+        /// <summary>
+        /// Sets length ratio
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void LengthRatioSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             LengthRatio = LengthRatioSlider.Value;
         }
 
+        /// <summary>
+        /// Sets left angle ratio
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void AngleRatioLeftSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             AngleRatioLeft = AngleRatioLeftSlider.Value;
         }
 
+        /// <summary>
+        /// Sets right angle ratio
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void AngleRatioRightSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             AngleRatioRight = AngleRatioRightSlider.Value;
         }
         
+        /// <summary>
+        /// Sets spacing
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void SpacingSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Spacing = SpacingSlider.Value;
         }
         
+        /// <summary>
+        /// Sets scale
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void ScaleSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Scale = ScaleSlider.Value;
         }        
         
+        /// <summary>
+        /// Sets resolution
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void ResolutionSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Resolution = (int)ResolutionSlider.Value;
         }       
         
+        /// <summary>
+        /// Sets Re ratio
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void ReRatioSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             ReRatio = ReRatioSlider.Value;
         }
         
+        /// <summary>
+        /// Sets Im ratio
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void ImRatioSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             ImRatio = ImRatioSlider.Value;
         }
 
+        /// <summary>
+        /// Zooms canvas
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void Zoom(object sender, MouseWheelEventArgs e)
         {
             double zoomFactor = e.Delta > 0 ? 0.2 : -0.2;
             Scale += zoomFactor;
         }
 
+        /// <summary>
+        /// Captures mouse position on press
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void PanMouseDown(object sender, MouseButtonEventArgs e)
         {
-            // MessageBox.Show("Опустил");
             _previousMousePosition = e.GetPosition(CanvasBorder);
             CanvasBorder.CaptureMouse();
         }
         
+        /// <summary>
+        /// Releases mouse capture
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void PanMouseUp(object sender, MouseButtonEventArgs e)
         {
             CanvasBorder.ReleaseMouseCapture();
-            // MessageBox.Show("Поднял");
         }
         
-
+        /// <summary>
+        /// Moves canvas relative to mouse movement
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void PanMouseMove(object sender, MouseEventArgs e)
         {
             if (CanvasBorder.IsMouseCaptured)
@@ -410,6 +548,11 @@ namespace FractalStudio
             }
         }
 
+        /// <summary>
+        /// Saves canvas as an image
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void SaveButtonClick(object sender, RoutedEventArgs e)
         {
             var rtb = new RenderTargetBitmap((int)FractalCanvas.RenderSize.Width, (int)FractalCanvas.RenderSize.Height, 96d, 96d, PixelFormats.Default);
@@ -431,6 +574,11 @@ namespace FractalStudio
             pngEncoder.Save(fs);
         }
 
+        /// <summary>
+        /// Sets function
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arguments</param>
         private void FunctionComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try

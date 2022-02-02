@@ -5,11 +5,27 @@ using System.Windows.Shapes;
 
 namespace FractalStudio.Fractals
 {
+    /// <summary>
+    /// Pythagoras Tree
+    /// </summary>
     public class PythagorasTree : Fractal
     {
         private readonly double _length;
         private readonly double _angle;
 
+        /// <summary>
+        /// Pythagoras Tree constructor
+        /// </summary>
+        /// <param name="canvas">Drawing canvas</param>
+        /// <param name="recursion">Depth of recursion</param>
+        /// <param name="x">X coordinate</param>
+        /// <param name="y">Y coordinate</param>
+        /// <param name="scale">Fractal scale</param>
+        /// <param name="lengthRatio">Length ration</param>
+        /// <param name="angleRatioLeft">Left angle ratio</param>
+        /// <param name="angleRatioRight">Right angle ratio</param>
+        /// <param name="spacing">Spacing between elements</param>
+        /// <param name="gradient">Gradient</param>
         public PythagorasTree(Canvas canvas, int recursion, int x, int y, double scale, double lengthRatio,
             double angleRatioLeft, double angleRatioRight, double spacing, Gradient gradient) :
             base(canvas, recursion, x, y, scale, lengthRatio, angleRatioLeft, angleRatioRight, spacing, gradient)
@@ -19,17 +35,34 @@ namespace FractalStudio.Fractals
             UpdateGradientDepth();
         }
 
+        /// <summary>
+        /// Updates gradient depth
+        /// </summary>
         protected sealed override void UpdateGradientDepth()
         {
             _gradient.Length = _recursion;
         }
 
+        /// <summary>
+        /// Draws fractal
+        /// </summary>
         public override void Draw()
         {
             _canvas.Children.Clear();
             DrawTree(_x, _y, _length * _scale, _angle, _lengthRatio, _angleRatioLeft, _angleRatioRight);
         }
 
+        /// <summary>
+        /// Draws part of tree
+        /// </summary>
+        /// <param name="x">X coordinate</param>
+        /// <param name="y">Y coordinate</param>
+        /// <param name="length">Length of line</param>
+        /// <param name="angle">Angle of line</param>
+        /// <param name="lengthRatio">Ratio of previous and current lengths</param>
+        /// <param name="angleRatioLeft">Left angle added value</param>
+        /// <param name="angleRatioRight">Right angle added value</param>
+        /// <param name="step">Current recursion step</param>
         private void DrawTree(int x, int y, double length, double angle, double lengthRatio, double angleRatioLeft, double angleRatioRight, int step = 0)
         {
             if (step >= _recursion) return;

@@ -5,11 +5,27 @@ using System.Windows.Shapes;
 
 namespace FractalStudio.Fractals
 {
+    /// <summary>
+    /// Koch Curve fractal
+    /// </summary>
     public class KochСurve : Fractal
     {
         private int _sideIndex;
         private readonly double _length;
 
+        /// <summary>
+        /// Koch Curve constructor
+        /// </summary>
+        /// <param name="canvas">Drawing canvas</param>
+        /// <param name="recursion">Depth of recursion</param>
+        /// <param name="x">X coordinate</param>
+        /// <param name="y">Y coordinate</param>
+        /// <param name="scale">Fractal scale</param>
+        /// <param name="lengthRatio">Length ration</param>
+        /// <param name="angleRatioLeft">Left angle ratio</param>
+        /// <param name="angleRatioRight">Right angle ratio</param>
+        /// <param name="spacing">Spacing between elements</param>
+        /// <param name="gradient">Gradient</param>
         public KochСurve(Canvas canvas, int recursion, int x, int y, double scale, double lengthRatio,
             double angleRatioLeft, double angleRatioRight, double spacing, Gradient gradient) :
             base(canvas, recursion, x, y, scale, lengthRatio, angleRatioLeft, angleRatioRight, spacing, gradient)
@@ -18,11 +34,17 @@ namespace FractalStudio.Fractals
             UpdateGradientDepth();
         }
         
+        /// <summary>
+        /// Updates gradient depth
+        /// </summary>
         protected sealed override void UpdateGradientDepth()
         {
             _gradient.Length = (int)Math.Pow(4, _recursion - 1);
         }
 
+        /// <summary>
+        /// Draws fractal
+        /// </summary>
         public override void Draw()
         {
             _canvas.Children.Clear();
@@ -30,6 +52,14 @@ namespace FractalStudio.Fractals
             DrawCurve(_x, _y, (int)(_x + _length * _scale), _y);
         }
 
+        /// <summary>
+        /// Draws part of the curve
+        /// </summary>
+        /// <param name="stX">Start X</param>
+        /// <param name="stY">Start Y</param>
+        /// <param name="enX">End X</param>
+        /// <param name="enY">End Y</param>
+        /// <param name="step">Current recursion step</param>
         private void DrawCurve(int stX, int stY, int enX, int enY, int step = 0)
         {
             if (step >= _recursion) return;

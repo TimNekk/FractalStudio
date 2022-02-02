@@ -5,11 +5,28 @@ using System.Windows.Media.Imaging;
 
 namespace FractalStudio.Fractals
 {
+    /// <summary>
+    /// Julia Set fractal
+    /// </summary>
     public class JuliaSet : Fractal
     {
         private new WriteableBitmap _canvas;
         private readonly Image _img;
 
+        /// <summary>
+        /// Julia Set constructor
+        /// </summary>
+        /// <param name="canvas">Drawing canvas</param>
+        /// <param name="recursion">Depth of recursion</param>
+        /// <param name="x">X coordinate</param>
+        /// <param name="y">Y coordinate</param>
+        /// <param name="scale">Fractal scale</param>
+        /// <param name="lengthRatio">Length ration</param>
+        /// <param name="angleRatioLeft">Left angle ratio</param>
+        /// <param name="angleRatioRight">Right angle ratio</param>
+        /// <param name="spacing">Spacing between elements</param>
+        /// <param name="gradient">Gradient</param>
+        /// <param name="img">Image with canvas</param>
         public JuliaSet(Canvas canvas, int recursion, int x, int y, double scale, double lengthRatio,
             double angleRatioLeft, double angleRatioRight, double spacing, Gradient gradient, Image img) :
             base(canvas, recursion, x, y, scale, lengthRatio, angleRatioLeft, angleRatioRight, spacing, gradient)
@@ -18,29 +35,40 @@ namespace FractalStudio.Fractals
             _img = img;
         }
 
+        /// <summary>
+        /// Updates gradient depth
+        /// </summary>
         protected sealed override void UpdateGradientDepth()
         {
             _gradient.Length = _recursion + 1;
         }
 
+        /// <summary>
+        /// Draws fractal
+        /// </summary>
         public override void Draw()
         {
             _canvas = BitmapFactory.New((int) _lengthRatio, (int) _lengthRatio);
             _img.Source = _canvas;
-            DrawTree((int)_lengthRatio, (int)_lengthRatio);
+            DrawSet((int)_lengthRatio, (int)_lengthRatio);
         }
 
-        private void DrawTree(int w, int h)
+        /// <summary>
+        /// Draws set
+        /// </summary>
+        /// <param name="width">Amount of pixels in width</param>
+        /// <param name="height">Amount of pixels in height</param>
+        private void DrawSet(int width, int height)
         {
-            for (int x = 0; x < w; x++)
+            for (int x = 0; x < width; x++)
             {
-                for (int y = 0; y < h; y++)
+                for (int y = 0; y < height; y++)
                 {
-                    double  newRe = 1.5 * (x - w / 2) / (0.5 * _scale * w) - (double)_x / 1000;
-                    double newIm = (y - h / 2) / (0.5 * _scale * h) - (double)_y / 1000;
+                    double  newRe = 1.5 * (x - width / 2) / (0.5 * _scale * width) - (double)_x / 1000;
+                    double newIm = (y - height / 2) / (0.5 * _scale * height) - (double)_y / 1000;
                     
-                    int i;
-                    for (i = 0; i < _recursion; i++)
+                    int step;
+                    for (step = 0; step < _recursion; step++)
                     {
                         double oldRe = newRe;
                         double oldIm = newIm;
@@ -50,11 +78,17 @@ namespace FractalStudio.Fractals
                         if (newRe * newRe + newIm * newIm > 4) break;
                     }
 
-                    _canvas.SetPixel(x, y, i == _recursion ? Colors.Black : _gradient[i]);
+                    _canvas.SetPixel(x, y, step == _recursion ? Colors.Black : _gradient[step]);
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Generates new values
+        /// </summary>
+        /// <param name="oldRe"></param>
+        /// <param name="oldIm"></param>
+        /// <returns>Re and Im values</returns>
         private (double, double) GenerateNewValues(double oldRe, double oldIm)
         {
             switch (_spacing)

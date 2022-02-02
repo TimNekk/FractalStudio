@@ -5,10 +5,26 @@ using System.Windows.Shapes;
 
 namespace FractalStudio.Fractals
 {
+    /// <summary>
+    /// Sierpinski Carpet
+    /// </summary>
     public class SierpinskiCarpet : Fractal
     {
         private readonly double _length;
 
+        /// <summary>
+        /// Sierpinski Carpet constructor
+        /// </summary>
+        /// <param name="canvas">Drawing canvas</param>
+        /// <param name="recursion">Depth of recursion</param>
+        /// <param name="x">X coordinate</param>
+        /// <param name="y">Y coordinate</param>
+        /// <param name="scale">Fractal scale</param>
+        /// <param name="lengthRatio">Length ration</param>
+        /// <param name="angleRatioLeft">Left angle ratio</param>
+        /// <param name="angleRatioRight">Right angle ratio</param>
+        /// <param name="spacing">Spacing between elements</param>
+        /// <param name="gradient">Gradient</param>
         public SierpinskiCarpet(Canvas canvas, int recursion, int x, int y, double scale, double lengthRatio,
             double angleRatioLeft, double angleRatioRight, double spacing, Gradient gradient) :
             base(canvas, recursion, x, y, scale, lengthRatio, angleRatioLeft, angleRatioRight, spacing, gradient)
@@ -17,11 +33,17 @@ namespace FractalStudio.Fractals
             UpdateGradientDepth();
         }
         
+        /// <summary>
+        /// Updates gradient depth
+        /// </summary>
         protected sealed override void UpdateGradientDepth()
         {
             _gradient.Length = 2;
         }
 
+        /// <summary>
+        /// Draws fractal
+        /// </summary>
         public override void Draw()
         {
             _canvas.Children.Clear();
@@ -48,6 +70,13 @@ namespace FractalStudio.Fractals
             DrawHoles(_x + newLength, _y + newLength, newLength);
         }
 
+        /// <summary>
+        /// Draws holes in square
+        /// </summary>
+        /// <param name="x">X coordinate</param>
+        /// <param name="y">Y coordinate</param>
+        /// <param name="length">Length of hole</param>
+        /// <param name="step">Current recursion step</param>
         private void DrawHoles(
             int x,
             int y,
