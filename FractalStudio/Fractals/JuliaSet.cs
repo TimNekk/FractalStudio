@@ -1,32 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FractalStudio.Fractals
 {
     public class JuliaSet : Fractal
     {
-        private readonly double _length;
-        private readonly double _cRe;
-        private readonly double _cIm;
-        private readonly double _moveX;
-        private readonly double _moveY;
-        private WriteableBitmap _canvas;
+        private new WriteableBitmap _canvas;
         private readonly Image _img;
 
         public JuliaSet(Canvas canvas, int recursion, int x, int y, double scale, double lengthRatio,
             double angleRatioLeft, double angleRatioRight, double spacing, Gradient gradient, Image img) :
             base(canvas, recursion, x, y, scale, lengthRatio, angleRatioLeft, angleRatioRight, spacing, gradient)
         {
-            _length = 80;
             UpdateGradientDepth();
-            _moveX = 1;
-            _moveY = 0;
             _img = img;
         }
 
@@ -56,46 +44,8 @@ namespace FractalStudio.Fractals
                     {
                         double oldRe = newRe;
                         double oldIm = newIm;
-                        
-                        switch (_spacing)
-                        {
-                            case 0:
-                            {
-                                newRe = oldRe * oldRe - oldIm * oldIm + _angleRatioLeft;
-                                newIm = 2 * oldRe * oldIm + _angleRatioRight;
-                                break;
-                            }
-                            case 1:
-                            {
-                                newRe = Math.Pow(oldRe * oldRe - oldIm * oldIm, 2) + _angleRatioLeft;
-                                newIm = Math.Pow(2 * oldRe * oldIm, 2) + _angleRatioRight;
-                                break;
-                            }
-                            case 2:
-                            {
-                                newRe = Math.Sin(oldRe * oldRe - oldIm * oldIm) + _angleRatioLeft;
-                                newIm = Math.Sin(2 * oldRe * oldIm) + _angleRatioRight;
-                                break;
-                            }
-                            case 3:
-                            {
-                                newRe = Math.Cos(oldRe * oldRe - oldIm * oldIm) + _angleRatioLeft;
-                                newIm = Math.Cos(2 * oldRe * oldIm) + _angleRatioRight;
-                                break;
-                            }
-                            case 4:
-                            {
-                                newRe = Math.Cos(oldRe * oldRe - oldIm * oldIm) * Math.Sin(oldRe * oldRe - oldIm * oldIm) + _angleRatioLeft;
-                                newIm = Math.Cos(2 * oldRe * oldIm) * Math.Sin(2 * oldRe * oldIm) + _angleRatioRight;
-                                break;
-                            }
-                            case 5:
-                            {
-                                newRe = Math.Atan(oldRe * oldRe - oldIm * oldIm) + _angleRatioLeft;
-                                newIm = Math.Atan(2 * oldRe * oldIm) + _angleRatioRight;
-                                break;
-                            }
-                        }
+
+                        (newRe, newIm) = GenerateNewValues(oldRe, oldIm);
 
                         if (newRe * newRe + newIm * newIm > 4) break;
                     }
@@ -103,6 +53,39 @@ namespace FractalStudio.Fractals
                     _canvas.SetPixel(x, y, i == _recursion ? Colors.Black : _gradient[i]);
                 }
             }
+        }
+
+        private (double, double) GenerateNewValues(double oldRe, double oldIm)
+        {
+            switch (_spacing)
+                        {
+                            case 0:
+                            {
+                                return (oldRe * oldRe - oldIm * oldIm + _angleRatioLeft, 2 * oldRe * oldIm + _angleRatioRight);
+                            }
+                            case 1:
+                            {
+                                return (Math.Pow(oldRe * oldRe - oldIm * oldIm, 2) + _angleRatioLeft, Math.Pow(2 * oldRe * oldIm, 2) + _angleRatioRight);
+                            }
+                            case 2:
+                            {
+                                return (Math.Sin(oldRe * oldRe - oldIm * oldIm) + _angleRatioLeft, Math.Sin(2 * oldRe * oldIm) + _angleRatioRight);
+                            }
+                            case 3:
+                            {
+                                return (Math.Cos(oldRe * oldRe - oldIm * oldIm) + _angleRatioLeft, Math.Cos(2 * oldRe * oldIm) + _angleRatioRight);
+                            }
+                            case 4:
+                            {
+                                return (Math.Cos(oldRe * oldRe - oldIm * oldIm) * Math.Sin(oldRe * oldRe - oldIm * oldIm) + _angleRatioLeft, 
+                                    Math.Cos(2 * oldRe * oldIm) * Math.Sin(2 * oldRe * oldIm) + _angleRatioRight);
+                            }
+                            case 5:
+                            {
+                                return (Math.Atan(oldRe * oldRe - oldIm * oldIm) + _angleRatioLeft, Math.Atan(2 * oldRe * oldIm) + _angleRatioRight);
+                            }
+                        }
+            return (0, 0);
         }
     }
 }

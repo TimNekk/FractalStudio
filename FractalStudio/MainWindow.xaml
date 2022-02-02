@@ -213,7 +213,7 @@
                                 Margin="30 5"
                                 ValueChanged="AngleRatioLeftSliderValueChanged"
                                 Minimum="0"
-                                Maximum="0.6"
+                                Maximum="1"
                                 Value="1"
                                 TickFrequency="0.005"
                                 IsSnapToTickEnabled="True"/>
@@ -268,7 +268,7 @@
                                 Margin="30 5"
                                 ValueChanged="AngleRatioRightSliderValueChanged"
                                 Minimum="0"
-                                Maximum="0.6"
+                                Maximum="1"
                                 Value="1"
                                 TickFrequency="0.01"
                                 IsSnapToTickEnabled="True"/>

@@ -15,10 +15,8 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            
         </Style.Setters>
     </Style>
 </ResourceDictionary>

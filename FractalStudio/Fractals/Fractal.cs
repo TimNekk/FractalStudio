@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Media;
+﻿using System.Windows.Controls;
 
 namespace FractalStudio.Fractals
 {
     public abstract class Fractal
     {
-        private protected Canvas _canvas;
+        private protected readonly Canvas _canvas;
         
         private protected int _recursion;
 

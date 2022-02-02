@@ -10,7 +10,6 @@
                         <Grid VerticalAlignment="Stretch"
                               HorizontalAlignment="Stretch"
                               Background="{TemplateBinding Background}">
-                            
                             <TextBlock Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
                                        Margin="50 0 0 0"
@@ -19,13 +18,10 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            
             <Setter Property="Background" Value="#141937"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
-            
         </Style.Setters>
-        
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Background" Value="#1e2240"></Setter>

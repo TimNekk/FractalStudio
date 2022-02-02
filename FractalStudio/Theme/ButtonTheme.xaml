@@ -22,7 +22,6 @@
                                     </LinearGradientBrush>
                                 </Border.Background>
                             </Border>
-                            
                             <TextBlock Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
@@ -56,7 +55,6 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>

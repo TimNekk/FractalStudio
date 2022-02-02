@@ -7,7 +7,7 @@ namespace FractalStudio
 {
     public class Gradient
     {
-        public List<Color> Colors { private set; get; }
+        private List<Color> Colors { set; get; }
 
         private int _length;
 
@@ -58,11 +58,8 @@ namespace FractalStudio
             Colors = GetColorGradient(StartColor, EndColor, Length).ToList();
         }
         
-        public Color this[int index]
-        {
-            get => Colors[index];
-        }
-        
+        public Color this[int index] => Colors[index];
+
         /// <summary>
         /// Source: https://stackoverflow.com/questions/2011832/generate-color-gradient-in-c-sharp
         /// </summary>
@@ -94,12 +91,12 @@ namespace FractalStudio
             for (var i = 1; i < steps; ++i)
             {
                 yield return Color.FromArgb(
-                    (byte)c(from.A, stepA),
-                    (byte)c(from.R, stepR),
-                    (byte)c(from.G, stepG),
-                    (byte)c(from.B, stepB));
+                    (byte)C(from.A, stepA),
+                    (byte)C(from.R, stepR),
+                    (byte)C(from.G, stepG),
+                    (byte)C(from.B, stepB));
 
-                int c(int fromC, double stepC)
+                int C(int fromC, double stepC)
                 {
                     return (int)Math.Round(fromC + stepC * i);
                 }

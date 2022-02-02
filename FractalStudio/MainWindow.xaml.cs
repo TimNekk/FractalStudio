@@ -18,8 +18,8 @@ namespace FractalStudio
     {
         private int _maxRecursion;
         private Point _previousMousePosition;
-        
-        public int MaxRecursion
+
+        private int MaxRecursion
         {
             get => _maxRecursion;
             set
@@ -31,8 +31,8 @@ namespace FractalStudio
         }
 
         private int _recursion;
-        
-        public int Recursion
+
+        private int Recursion
         {
             get => _recursion;
             set
@@ -45,8 +45,8 @@ namespace FractalStudio
         }
         
         private double _lengthRatio;
-        
-        public double LengthRatio
+
+        private double LengthRatio
         {
             get => _lengthRatio;
             set
@@ -58,8 +58,8 @@ namespace FractalStudio
         }
         
         private double _angleRatioLeft;
-        
-        public double AngleRatioLeft
+
+        private double AngleRatioLeft
         {
             get => _angleRatioLeft;
             set
@@ -71,8 +71,8 @@ namespace FractalStudio
         }
         
         private double _angleRatioRight;
-        
-        public double AngleRatioRight
+
+        private double AngleRatioRight
         {
             get => _angleRatioRight;
             set
@@ -84,8 +84,8 @@ namespace FractalStudio
         }
         
         private double _spacing;
-        
-        public double Spacing
+
+        private double Spacing
         {
             get => _spacing;
             set
@@ -98,8 +98,8 @@ namespace FractalStudio
         }
         
         private double _scale;
-        
-        public double Scale
+
+        private double Scale
         {
             get => _scale;
             set
@@ -112,8 +112,8 @@ namespace FractalStudio
         }
         
         private int _resolution;
-        
-        public int Resolution
+
+        private int Resolution
         {
             get => _resolution;
             set
@@ -126,8 +126,8 @@ namespace FractalStudio
         }
         
         private double _reRatio;
-        
-        public double ReRatio
+
+        private double ReRatio
         {
             get => _reRatio;
             set
@@ -139,8 +139,8 @@ namespace FractalStudio
         }
         
         private double _imRatio;
-        
-        public double ImRatio
+
+        private double ImRatio
         {
             get => _imRatio;
             set
@@ -152,8 +152,8 @@ namespace FractalStudio
         }
         
         private int _x;
-        
-        public int X
+
+        private int X
         {
             get => _x;
             set
@@ -164,8 +164,8 @@ namespace FractalStudio
         }
         
         private int _y;
-        
-        public int Y
+
+        private int Y
         {
             get => _y;
             set
@@ -177,7 +177,7 @@ namespace FractalStudio
 
         private Fractal _fractal;
 
-        public Fractal Fractal
+        private Fractal Fractal
         {
             get => _fractal;
             set
@@ -188,7 +188,7 @@ namespace FractalStudio
         
         private Gradient _gradient;
 
-        public Gradient Gradient
+        private Gradient Gradient
         {
             get => _gradient;
             set
@@ -244,7 +244,7 @@ namespace FractalStudio
 
         private void PythagorasTreeButtonClick(object sender, RoutedEventArgs e)
         {
-            MaxRecursion = 10;
+            MaxRecursion = 12;
             X = 500;
             Y = 500;
             Fractal = new PythagorasTree(FractalCanvas, Recursion, 500, 500, 1, LengthRatio, AngleRatioLeft, AngleRatioRight, Spacing, Gradient);
@@ -421,7 +421,7 @@ namespace FractalStudio
             var dialog = new SaveFileDialog
             {
                 Filter = "PNG Files (*.png)|*.png",
-                InitialDirectory = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName
+                InitialDirectory = new DirectoryInfo(Environment.CurrentDirectory).Parent?.Parent?.FullName ?? string.Empty
             };
             
             if (dialog.ShowDialog() == false)
