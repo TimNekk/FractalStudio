@@ -1,3 +1,5 @@
+![Скриншот программы](preview.png)
+
 # FractalStudio
 
 **C# WPF Application that can be used for learning different fractals**
