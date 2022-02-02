@@ -111,6 +111,10 @@
       <HintPath>..\packages\WpfScreenHelper.0.3.0.0\lib\net40\WpfScreenHelper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WriteableBitmapEx.Wpf, Version=1.6.8.0, Culture=neutral, PublicKeyToken=50375ca6144f1c69">
+      <HintPath>..\packages\WriteableBitmapEx.1.6.8\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock, Version=4.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4">
       <HintPath>..\packages\Extended.Wpf.Toolkit.4.2.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
       <Private>True</Private>
@@ -139,6 +143,7 @@
     </ApplicationDefinition>
     <Compile Include="Fractals\CantorSet.cs" />
     <Compile Include="Fractals\Fractal.cs" />
+    <Compile Include="Fractals\JuliaSet.cs" />
     <Compile Include="Fractals\KochCurve.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
