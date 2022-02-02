@@ -3,14 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FractalStudio"
         mc:Ignorable="d"
-        Height="800" Width="1500"
+        Height="970" Width="1500"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
         ResizeMode="CanResizeWithGrip"
-        MinHeight="800" MinWidth="1000">
+        MinHeight="970" MinWidth="1000">
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -61,178 +60,365 @@
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
                              Click="CantorSetButtonClick"/>
+                <RadioButton Content="Множество Жюлиа"
+                             x:Name="JuliaSetButton"
+                             Height="50"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Click="JuliaSetButtonClick"/>
             </StackPanel>
             
+            
             <StackPanel Grid.Row="1" 
-                        Margin="0 00 0 20">
-                <StackPanel Margin="0 0 0 15">
-                    <TextBlock Text="Расстояние"
-                               HorizontalAlignment="Center"
-                               Foreground="#a2a9c4"
-                               FontSize="18">
-                    </TextBlock>
-                
-                    <Slider x:Name="SpacingSlider"
-                            Cursor="Hand"
-                            Margin="30 5"
-                            ValueChanged="SpacingSliderValueChanged"
-                            Minimum="5"
-                            Maximum="100"
-                            Value="1"
-                            TickFrequency="0.01"
-                            IsSnapToTickEnabled="True"/>
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Setter Property="Visibility" Value="Hidden"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsChecked, ElementName=CantorSetButton}" Value="true">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-                </StackPanel>
-                
-                <StackPanel Margin="0 0 0 15">
-                    <TextBlock Text="Отношение длин"
-                               HorizontalAlignment="Center"
-                               Foreground="#a2a9c4"
-                               FontSize="18">
-                    </TextBlock>
-                
-                    <Slider x:Name="LengthRatioSlider"
-                            Cursor="Hand"
-                            Margin="30 5"
-                            ValueChanged="LengthRatioSliderValueChanged"
-                            Minimum="0"
-                            Maximum="1"
-                            Value="1"
-                            TickFrequency="0.005"
-                            IsSnapToTickEnabled="True"/>
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Setter Property="Visibility" Value="Hidden"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsChecked, ElementName=PythagorasTreeButton}" Value="true">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-                </StackPanel>
-                
-                <StackPanel Margin="0 0 0 15">
-                    <TextBlock Text="Левый угол"
-                               HorizontalAlignment="Center"
-                               Foreground="#a2a9c4"
-                               FontSize="18">
-                    </TextBlock>
-                
-                    <Slider x:Name="AngleRatioLeftSlider"
-                            Cursor="Hand"
-                            Margin="30 5"
-                            ValueChanged="AngleRatioLeftSliderValueChanged"
-                            Minimum="0"
-                            Maximum="0.6"
-                            Value="1"
-                            TickFrequency="0.005"
-                            IsSnapToTickEnabled="True"/>
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Setter Property="Visibility" Value="Hidden"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsChecked, ElementName=PythagorasTreeButton}" Value="true">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-                </StackPanel>
-                
-                <StackPanel Margin="0 0 0 15">
-                    <TextBlock Text="Правый угол"
-                               HorizontalAlignment="Center"
-                               Foreground="#a2a9c4"
-                               FontSize="18"/>
-                
-                    <Slider x:Name="AngleRatioRightSlider"
-                            Cursor="Hand"
-                            Margin="30 5"
-                            ValueChanged="AngleRatioRightSliderValueChanged"
-                            Minimum="0"
-                            Maximum="0.6"
-                            Value="1"
-                            TickFrequency="0.01"
-                            IsSnapToTickEnabled="True"/>
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Setter Property="Visibility" Value="Hidden"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsChecked, ElementName=PythagorasTreeButton}" Value="true">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-                </StackPanel>
-                
-                <StackPanel Margin="0 0 0 15">
-                    <TextBlock Text="Глубина рекурсии"
-                               HorizontalAlignment="Center"
-                               Foreground="#a2a9c4"
-                               FontSize="18">
-                    </TextBlock>
-                
-                    <Slider x:Name="RecursionSlider"
-                            Cursor="Hand"
-                            Margin="30 5"
-                            ValueChanged="RecursionSliderValueChanged"
-                            Minimum="1"
-                            Maximum="10"
-                            Value="4"
-                            TickFrequency="1"
-                            IsSnapToTickEnabled="True"/>
-                </StackPanel>
-                
-                <Grid Height="70"
-                      Margin="0 0 0 25">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+                        VerticalAlignment="Bottom">
+                <Grid Margin="0 00 0 20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
                     
-                    <Frame Grid.ColumnSpan="2"
-                           x:Name="GradientFrame"
-                           IsHitTestVisible="False"
-                           Cursor="Hand"/>
+                    <StackPanel Grid.Row="0" Margin="0 0 0 15">
+                        <TextBlock Text="Функция"
+                                   HorizontalAlignment="Center"
+                                   Foreground="#a2a9c4"
+                                   FontSize="18">
+                        </TextBlock>
+                        
+                        <ComboBox Cursor="Hand"
+                                  Margin="35 10 35 0"
+                                  SelectedIndex="0"
+                                  HorizontalContentAlignment="Center"
+                                  FontSize="18"
+                                  BorderThickness="0"
+                                  x:Name="FunctionComboBox"
+                                  SelectionChanged="FunctionComboBoxSelectionChanged">
+                            <TextBlock Text="z"/>
+                            <TextBlock Text="z^2"/>
+                            <TextBlock Text="sin(z)"/>
+                            <TextBlock Text="cos(z)"/>
+                            <TextBlock Text="sin(z)cos(z)"/>
+                            <TextBlock Text="arctg(z)"/>
+                        </ComboBox>
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=JuliaSetButton}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                    </StackPanel>
                     
-                    <Button Grid.Column="0"
-                            Cursor="Hand"
-                            x:Name="StartGradientButton"
-                            BorderThickness="0"
-                            Click="StartGradientButtonClick"
-                            Background="Transparent"/>
-                    <Button Grid.Column="1"
-                            Cursor="Hand"
-                            x:Name="EndGradientButton"
-                            BorderThickness="0"
-                            Click="EndGradientButtonClick"
-                            Background="Transparent"/>
+                        <StackPanel Grid.Row="1" Margin="0 0 0 15">
+                        <TextBlock Text="Коэф. Im."
+                                   HorizontalAlignment="Center"
+                                   Foreground="#a2a9c4"
+                                   FontSize="18">
+                        </TextBlock>
+                    
+                        <Slider x:Name="ImRatioSlider"
+                                Cursor="Hand"
+                                Margin="30 5"
+                                ValueChanged="ImRatioSliderValueChanged"
+                                Minimum="-2"
+                                Maximum="2"
+                                Value="0"
+                                TickFrequency="0.001"
+                                IsSnapToTickEnabled="True"/>
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=JuliaSetButton}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="2" Margin="0 0 0 15">
+                        <TextBlock Text="Отношение длин"
+                                   HorizontalAlignment="Center"
+                                   Foreground="#a2a9c4"
+                                   FontSize="18">
+                        </TextBlock>
+                    
+                        <Slider x:Name="LengthRatioSlider"
+                                Cursor="Hand"
+                                Margin="30 5"
+                                ValueChanged="LengthRatioSliderValueChanged"
+                                Minimum="0"
+                                Maximum="1"
+                                Value="1"
+                                TickFrequency="0.005"
+                                IsSnapToTickEnabled="True"/>
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=PythagorasTreeButton}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="2" Margin="0 0 0 15">
+                        <TextBlock Text="Коэф. Re."
+                                   HorizontalAlignment="Center"
+                                   Foreground="#a2a9c4"
+                                   FontSize="18">
+                        </TextBlock>
+                    
+                        <Slider x:Name="ReRatioSlider"
+                                Cursor="Hand"
+                                Margin="30 5"
+                                ValueChanged="ReRatioSliderValueChanged"
+                                Minimum="-2"
+                                Maximum="2"
+                                Value="0"
+                                TickFrequency="0.001"
+                                IsSnapToTickEnabled="True"/>
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=JuliaSetButton}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="3" Margin="0 0 0 15">
+                        <TextBlock Text="Левый угол"
+                                   HorizontalAlignment="Center"
+                                   Foreground="#a2a9c4"
+                                   FontSize="18">
+                        </TextBlock>
+                    
+                        <Slider x:Name="AngleRatioLeftSlider"
+                                Cursor="Hand"
+                                Margin="30 5"
+                                ValueChanged="AngleRatioLeftSliderValueChanged"
+                                Minimum="0"
+                                Maximum="0.6"
+                                Value="1"
+                                TickFrequency="0.005"
+                                IsSnapToTickEnabled="True"/>
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=PythagorasTreeButton}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="3" Margin="0 0 0 15">
+                        <TextBlock Text="Разрешение"
+                                   HorizontalAlignment="Center"
+                                   Foreground="#a2a9c4"
+                                   FontSize="18">
+                        </TextBlock>
+                    
+                        <Slider x:Name="ResolutionSlider"
+                                Cursor="Hand"
+                                Margin="30 5"
+                                ValueChanged="ResolutionSliderValueChanged"
+                                Minimum="1"
+                                Maximum="1000"
+                                Value="1"
+                                TickFrequency="10"
+                                IsSnapToTickEnabled="True"/>
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=JuliaSetButton}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="4" Margin="0 0 0 15">
+                        <TextBlock Text="Правый угол"
+                                   HorizontalAlignment="Center"
+                                   Foreground="#a2a9c4"
+                                   FontSize="18"/>
+                    
+                        <Slider x:Name="AngleRatioRightSlider"
+                                Cursor="Hand"
+                                Margin="30 5"
+                                ValueChanged="AngleRatioRightSliderValueChanged"
+                                Minimum="0"
+                                Maximum="0.6"
+                                Value="1"
+                                TickFrequency="0.01"
+                                IsSnapToTickEnabled="True"/>
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=PythagorasTreeButton}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="4" Margin="0 0 0 15">
+                        <TextBlock Text="Расстояние"
+                                   HorizontalAlignment="Center"
+                                   Foreground="#a2a9c4"
+                                   FontSize="18">
+                        </TextBlock>
+                    
+                        <Slider x:Name="SpacingSlider"
+                                Cursor="Hand"
+                                Margin="30 5"
+                                ValueChanged="SpacingSliderValueChanged"
+                                Minimum="5"
+                                Maximum="100"
+                                Value="1"
+                                TickFrequency="0.01"
+                                IsSnapToTickEnabled="True"/>
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=CantorSetButton}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="4" Margin="0 0 0 15">
+                        <TextBlock Text="Маштаб"
+                                   HorizontalAlignment="Center"
+                                   Foreground="#a2a9c4"
+                                   FontSize="18">
+                        </TextBlock>
+                    
+                        <Slider x:Name="ScaleSlider"
+                                Cursor="Hand"
+                                Margin="30 5"
+                                ValueChanged="ScaleSliderValueChanged"
+                                Minimum="1"
+                                Maximum="500"
+                                Value="5"
+                                TickFrequency="1"
+                                IsSnapToTickEnabled="True"/>
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=JuliaSetButton}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="5" Margin="0 0 0 15">
+                        <TextBlock Text="Глубина рекурсии"
+                                   HorizontalAlignment="Center"
+                                   Foreground="#a2a9c4"
+                                   FontSize="18">
+                        </TextBlock>
+                    
+                        <Slider x:Name="RecursionSlider"
+                                Cursor="Hand"
+                                Margin="30 5"
+                                ValueChanged="RecursionSliderValueChanged"
+                                Minimum="1"
+                                Maximum="10"
+                                Value="4"
+                                TickFrequency="1"
+                                IsSnapToTickEnabled="True"/>
+                    </StackPanel>
+                    
+                    <Grid Grid.Row="6" Height="70"
+                          Margin="0 0 0 25">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Frame Grid.ColumnSpan="2"
+                               x:Name="GradientFrame"
+                               IsHitTestVisible="False"
+                               Cursor="Hand"/>
+                        
+                        <Button Grid.Column="0"
+                                Cursor="Hand"
+                                BorderThickness="0"
+                                Click="StartGradientButtonClick"
+                                Background="Transparent"/>
+                        <Button Grid.Column="1"
+                                Cursor="Hand"
+                                BorderThickness="0"
+                                Click="EndGradientButtonClick"
+                                Background="Transparent"/>
+                    </Grid>
+                    
+                    <Button Grid.Row="7" Content="Сохранить"
+                            Height="45"
+                            FontSize="26"
+                            Margin="30 0"
+                            Style="{StaticResource ButtonTheme}"
+                            Click="SaveButtonClick"/>
                 </Grid>
-                
-                <Button Content="Сохранить"
-                        Height="45"
-                        FontSize="26"
-                        Margin="30 0"
-                        Style="{StaticResource ButtonTheme}"
-                        Click="SaveButtonClick"/>
             </StackPanel>
         </Grid>
         
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
-                <RowDefinition/>
+                <RowDefinition>
+                    <RowDefinition.Style>
+                        <Style TargetType="RowDefinition">
+                            <Setter Property="Height" Value="0"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsChecked, ElementName=JuliaSetButton}" Value="true">
+                                    <Setter Property="Height" Value="*"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </RowDefinition.Style>
+                </RowDefinition>
+                <RowDefinition>
+                    <RowDefinition.Style>
+                        <Style TargetType="RowDefinition">
+                            <Setter Property="Height" Value="*"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsChecked, ElementName=JuliaSetButton}" Value="true">
+                                    <Setter Property="Height" Value="0"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </RowDefinition.Style>
+                </RowDefinition>
             </Grid.RowDefinitions>
             
             <Border Grid.Row="0"
@@ -271,21 +457,33 @@
             </Border>
             
             
-            <Border Grid.Row="1"
+            <Border Grid.Row="2"
                     x:Name="CanvasBorder"
                     Background="#0f142b"
                     Cursor="SizeAll"
                     MouseWheel="Zoom"
+                    MouseMove="PanMouseMove"
                     MouseLeftButtonDown="PanMouseDown"
                     MouseLeftButtonUp="PanMouseUp"
-                    MouseMove="PanMouseMove">
+                    >
                 <Viewbox>
                     <Canvas x:Name="FractalCanvas"
-                            Height="775"
+                            Height="945"
                             Width="1210"
                             Background="#0f142b"
                             ClipToBounds="True"/>
                 </Viewbox>
+            </Border>
+            
+            <Border Grid.Row="1" 
+                    Background="#0f142b">
+                <Image x:Name="ImageControl"
+                       Cursor="SizeAll"
+                       MouseWheel="Zoom"
+                       MouseLeftButtonDown="PanMouseDown"
+                       MouseLeftButtonUp="PanMouseUp"
+                       MouseMove="PanMouseMove"
+                       Stretch="Fill"/>
             </Border>
         </Grid>
     </Grid>
